@@ -1,0 +1,2848 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Receipt and invoice ingestion, extraction and review.">
+      
+      
+      
+      
+        <link rel="prev" href="../../diagrams/oauth-login/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>API - BillVault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BillVault" class="md-header__button md-logo" aria-label="BillVault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BillVault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BillVault" class="md-nav__button md-logo" aria-label="BillVault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BillVault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture diagrams
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture diagrams
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../diagrams/ingestion-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingestion pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../diagrams/oauth-login/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OAuth login and signup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsmerge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_iddelete-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/delete-pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idreorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/reorder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idrotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/rotate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idsplit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/split
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiingestdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/ingest/directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apijobsbatch_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/jobs/{batch_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apireceipts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/receipts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apireceiptsreceipt_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/receipts/{receipt_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apireceiptsreceipt_idreprocess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/receipts/{receipt_id}/reprocess
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apistripewebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/stripe/webhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/logout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authproviderauthorize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/{provider}/authorize
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authprovidercallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/{provider}/callback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-me" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /me
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#body_upload_document_api_documents_upload_post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Body_upload_document_api_documents_upload_post
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletepagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeletePagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documenteditreason" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentEditReason
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpvalidationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importbatchout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ImportBatchOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importbatchstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ImportBatchStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingestdirectoryrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IngestDirectoryRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lineitemout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LineItemOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergedocumentsrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MergeDocumentsRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptdetailout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptDetailOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptreviewstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptReviewStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reorderpagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReorderPagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotatepagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RotatePagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitdocumentrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SplitDocumentRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsmerge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_iddelete-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/delete-pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idreorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/reorder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idrotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/rotate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apidocumentsdocument_idsplit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/documents/{document_id}/split
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apiingestdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/ingest/directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apijobsbatch_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/jobs/{batch_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apireceipts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/receipts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apireceiptsreceipt_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/receipts/{receipt_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apireceiptsreceipt_idreprocess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/receipts/{receipt_id}/reprocess
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apistripewebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/stripe/webhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authlogout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/logout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authproviderauthorize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/{provider}/authorize
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-authprovidercallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /auth/{provider}/callback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-me" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /me
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#body_upload_document_api_documents_upload_post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Body_upload_document_api_documents_upload_post
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletepagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeletePagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documenteditreason" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentEditReason
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpvalidationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importbatchout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ImportBatchOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importbatchstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ImportBatchStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingestdirectoryrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IngestDirectoryRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lineitemout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LineItemOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergedocumentsrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MergeDocumentsRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptdetailout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptDetailOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptOut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptreviewstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptReviewStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiptstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReceiptStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reorderpagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReorderPagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotatepagesrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RotatePagesRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitdocumentrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SplitDocumentRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- Generated by scripts/gen_reference.py. Do not edit by hand: run `uv run python scripts/gen_reference.py`. -->
+
+<h1 id="api-reference">API reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
+<p>BillVault 0.1.0. Generated from the FastAPI OpenAPI document (<a href="../openapi.json"><code>openapi.json</code></a>).</p>
+<h2 id="endpoints">Endpoints<a class="headerlink" href="#endpoints" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/merge</code></td>
+<td>Merge Documents Route</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/upload</code></td>
+<td>Upload Document</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/{document_id}/delete-pages</code></td>
+<td>Delete Document Pages</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/{document_id}/reorder</code></td>
+<td>Reorder Document Pages</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/{document_id}/rotate</code></td>
+<td>Rotate Document Pages</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/documents/{document_id}/split</code></td>
+<td>Split Document Pages</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/ingest/directory</code></td>
+<td>Ingest Directory</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/jobs/{batch_id}</code></td>
+<td>Get Job</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/receipts</code></td>
+<td>List Receipts</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/receipts/{receipt_id}</code></td>
+<td>Get Receipt</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/receipts/{receipt_id}/reprocess</code></td>
+<td>Reprocess Receipt Route</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/stripe/webhook</code></td>
+<td>Stripe Webhook</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/login</code></td>
+<td>Login Page</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/logout</code></td>
+<td>Logout</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/{provider}/authorize</code></td>
+<td>Authorize</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/{provider}/callback</code></td>
+<td>Callback</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/health</code></td>
+<td>Health</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/me</code></td>
+<td>Me</td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsmerge">POST <code>/api/documents/merge</code><a class="headerlink" href="#post-apidocumentsmerge" title="Permanent link">&para;</a></h3>
+<p>Phase 12.5: one batched query instead of one per requested document
+id. merge_documents() relies on <code>documents</code>' order matching
+payload.document_ids exactly (order's (doc_idx, page_number) pairs
+index positionally into it) -- rebuild that order explicitly since
+.in_() does not guarantee result order.</p>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>MergeDocumentsRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>DocumentOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsupload">POST <code>/api/documents/upload</code><a class="headerlink" href="#post-apidocumentsupload" title="Permanent link">&para;</a></h3>
+<p><strong>Request body</strong> (required): <code>multipart/form-data</code>: <code>Body_upload_document_api_documents_upload_post</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>ImportBatchOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsdocument_iddelete-pages">POST <code>/api/documents/{document_id}/delete-pages</code><a class="headerlink" href="#post-apidocumentsdocument_iddelete-pages" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>DeletePagesRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>DocumentOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsdocument_idreorder">POST <code>/api/documents/{document_id}/reorder</code><a class="headerlink" href="#post-apidocumentsdocument_idreorder" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>ReorderPagesRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>DocumentOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsdocument_idrotate">POST <code>/api/documents/{document_id}/rotate</code><a class="headerlink" href="#post-apidocumentsdocument_idrotate" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>RotatePagesRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>DocumentOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apidocumentsdocument_idsplit">POST <code>/api/documents/{document_id}/split</code><a class="headerlink" href="#post-apidocumentsdocument_idsplit" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>SplitDocumentRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: list of <code>DocumentOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apiingestdirectory">POST <code>/api/ingest/directory</code><a class="headerlink" href="#post-apiingestdirectory" title="Permanent link">&para;</a></h3>
+<p><strong>Request body</strong> (required): <code>application/json</code>: <code>IngestDirectoryRequest</code></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>ImportBatchOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-apijobsbatch_id">GET <code>/api/jobs/{batch_id}</code><a class="headerlink" href="#get-apijobsbatch_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>ImportBatchOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-apireceipts">GET <code>/api/receipts</code><a class="headerlink" href="#get-apireceipts" title="Permanent link">&para;</a></h3>
+<p>Phase 12.1: previously unbounded -- returned every matching row in
+one response. limit/offset keep this from fetching/serializing the
+entire receipts table on every call.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vendor</code></td>
+<td>query</td>
+<td>no</td>
+<td><code>string</code> or <code>null</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>query</td>
+<td>no</td>
+<td><code>string</code> or <code>null</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>query</td>
+<td>no</td>
+<td><code>integer</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>query</td>
+<td>no</td>
+<td><code>integer</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: list of <code>ReceiptOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-apireceiptsreceipt_id">GET <code>/api/receipts/{receipt_id}</code><a class="headerlink" href="#get-apireceiptsreceipt_id" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>receipt_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>ReceiptDetailOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apireceiptsreceipt_idreprocess">POST <code>/api/receipts/{receipt_id}/reprocess</code><a class="headerlink" href="#post-apireceiptsreceipt_idreprocess" title="Permanent link">&para;</a></h3>
+<p>Phase 11 (gap #2): retry extraction on an already-ingested receipt
+(bad OCR, gateway was briefly down, etc.) -- the only prior
+re-extraction trigger was the page-op routes above, which only ever
+act on a newly-created derived Document. Mirrors the admin-action
+trigger in app/admin.py's ReceiptAdmin.reprocess_receipts, same
+pattern as this file's own _enqueue_page_op_reextraction.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>receipt_id</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string:uuid</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>: <code>ImportBatchOut</code></td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="post-apistripewebhook">POST <code>/api/stripe/webhook</code><a class="headerlink" href="#post-apistripewebhook" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-authlogin">GET <code>/auth/login</code><a class="headerlink" href="#get-authlogin" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>text/html</code>: <code>string</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-authlogout">GET <code>/auth/logout</code><a class="headerlink" href="#get-authlogout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-authproviderauthorize">GET <code>/auth/{provider}/authorize</code><a class="headerlink" href="#get-authproviderauthorize" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>provider</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-authprovidercallback">GET <code>/auth/{provider}/callback</code><a class="headerlink" href="#get-authprovidercallback" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>provider</code></td>
+<td>path</td>
+<td>yes</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation Error</td>
+<td><code>application/json</code>: <code>HTTPValidationError</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-health">GET <code>/health</code><a class="headerlink" href="#get-health" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-me">GET <code>/me</code><a class="headerlink" href="#get-me" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Successful Response</td>
+<td><code>application/json</code>:</td>
+</tr>
+</tbody>
+</table>
+<h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">&para;</a></h2>
+<h3 id="body_upload_document_api_documents_upload_post">Body_upload_document_api_documents_upload_post<a class="headerlink" href="#body_upload_document_api_documents_upload_post" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>File</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deletepagesrequest">DeletePagesRequest<a class="headerlink" href="#deletepagesrequest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page_numbers</code></td>
+<td>list of <code>integer</code></td>
+<td>yes</td>
+<td>Page Numbers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="documenteditreason">DocumentEditReason<a class="headerlink" href="#documenteditreason" title="Permanent link">&para;</a></h3>
+<p>One of: <code>rotate</code>, <code>delete_pages</code>, <code>reorder</code>, <code>split</code>, <code>merge</code>, <code>manual</code></p>
+<h3 id="documentout">DocumentOut<a class="headerlink" href="#documentout" title="Permanent link">&para;</a></h3>
+<p>Phase 10: response schema for page-op routes -- not the full
+receipt/extraction detail (ReceiptDetailOut covers that once
+re-extraction finishes), just enough to confirm what was created and
+its lineage.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string:uuid</code></td>
+<td>yes</td>
+<td>Id</td>
+</tr>
+<tr>
+<td><code>original_filename</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original Filename</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>DocumentStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>file_hash</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>File Hash</td>
+</tr>
+<tr>
+<td><code>derived_from_id</code></td>
+<td><code>string:uuid</code> or <code>null</code></td>
+<td>yes</td>
+<td>Derived From Id</td>
+</tr>
+<tr>
+<td><code>edit_reason</code></td>
+<td><code>DocumentEditReason</code> or <code>null</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string:date-time</code></td>
+<td>yes</td>
+<td>Created At</td>
+</tr>
+</tbody>
+</table>
+<h3 id="documentstatus">DocumentStatus<a class="headerlink" href="#documentstatus" title="Permanent link">&para;</a></h3>
+<p>One of: <code>discovered</code>, <code>processed</code>, <code>duplicate</code>, <code>failed</code></p>
+<h3 id="httpvalidationerror">HTTPValidationError<a class="headerlink" href="#httpvalidationerror" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td>list of <code>ValidationError</code></td>
+<td>no</td>
+<td>Detail</td>
+</tr>
+</tbody>
+</table>
+<h3 id="importbatchout">ImportBatchOut<a class="headerlink" href="#importbatchout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string:uuid</code></td>
+<td>yes</td>
+<td>Id</td>
+</tr>
+<tr>
+<td><code>source_type</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source Type</td>
+</tr>
+<tr>
+<td><code>source_path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Source Path</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>ImportBatchStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>files_discovered</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Files Discovered</td>
+</tr>
+<tr>
+<td><code>documents_created</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Documents Created</td>
+</tr>
+<tr>
+<td><code>duplicates_skipped</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Duplicates Skipped</td>
+</tr>
+<tr>
+<td><code>receipts_created</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Receipts Created</td>
+</tr>
+<tr>
+<td><code>receipts_failed</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Receipts Failed</td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Log</td>
+</tr>
+</tbody>
+</table>
+<h3 id="importbatchstatus">ImportBatchStatus<a class="headerlink" href="#importbatchstatus" title="Permanent link">&para;</a></h3>
+<p>One of: <code>queued</code>, <code>running</code>, <code>completed</code>, <code>failed</code></p>
+<h3 id="ingestdirectoryrequest">IngestDirectoryRequest<a class="headerlink" href="#ingestdirectoryrequest" title="Permanent link">&para;</a></h3>
+<p>Phase 3: replaces the previous bare <code>payload: dict</code> -- <code>path</code> is now
+schema-validated (a string, required) before it ever reaches the
+filesystem-containment check in ingestor.py.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Path</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lineitemout">LineItemOut<a class="headerlink" href="#lineitemout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string:uuid</code></td>
+<td>yes</td>
+<td>Id</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Quantity</td>
+</tr>
+<tr>
+<td><code>unit_price</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Unit Price</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Total</td>
+</tr>
+<tr>
+<td><code>sku</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Sku</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mergedocumentsrequest">MergeDocumentsRequest<a class="headerlink" href="#mergedocumentsrequest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document_ids</code></td>
+<td>list of <code>string:uuid</code></td>
+<td>yes</td>
+<td>Document Ids</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>list of list of</td>
+<td>yes</td>
+<td>Order</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiptdetailout">ReceiptDetailOut<a class="headerlink" href="#receiptdetailout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string:uuid</code></td>
+<td>yes</td>
+<td>Id</td>
+</tr>
+<tr>
+<td><code>vendor</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Vendor</td>
+</tr>
+<tr>
+<td><code>invoice_number</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Invoice Number</td>
+</tr>
+<tr>
+<td><code>invoice_date</code></td>
+<td><code>string:date</code> or <code>null</code></td>
+<td>yes</td>
+<td>Invoice Date</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Total</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>ReceiptStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>review_status</code></td>
+<td><code>ReceiptReviewStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>extraction_method</code></td>
+<td><code>string</code> or <code>null</code></td>
+<td>yes</td>
+<td>Extraction Method</td>
+</tr>
+<tr>
+<td><code>extraction_confidence</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Extraction Confidence</td>
+</tr>
+<tr>
+<td><code>original_filename</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original Filename</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string:date-time</code></td>
+<td>yes</td>
+<td>Created At</td>
+</tr>
+<tr>
+<td><code>vendor_address</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Vendor Address</td>
+</tr>
+<tr>
+<td><code>due_date</code></td>
+<td><code>string:date</code> or <code>null</code></td>
+<td>yes</td>
+<td>Due Date</td>
+</tr>
+<tr>
+<td><code>subtotal</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Subtotal</td>
+</tr>
+<tr>
+<td><code>tax</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Tax</td>
+</tr>
+<tr>
+<td><code>payment_method</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Payment Method</td>
+</tr>
+<tr>
+<td><code>raw_text</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Raw Text</td>
+</tr>
+<tr>
+<td><code>error_message</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Error Message</td>
+</tr>
+<tr>
+<td><code>line_items</code></td>
+<td>list of <code>LineItemOut</code></td>
+<td>yes</td>
+<td>Line Items</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiptout">ReceiptOut<a class="headerlink" href="#receiptout" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string:uuid</code></td>
+<td>yes</td>
+<td>Id</td>
+</tr>
+<tr>
+<td><code>vendor</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Vendor</td>
+</tr>
+<tr>
+<td><code>invoice_number</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Invoice Number</td>
+</tr>
+<tr>
+<td><code>invoice_date</code></td>
+<td><code>string:date</code> or <code>null</code></td>
+<td>yes</td>
+<td>Invoice Date</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Total</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>ReceiptStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>review_status</code></td>
+<td><code>ReceiptReviewStatus</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>extraction_method</code></td>
+<td><code>string</code> or <code>null</code></td>
+<td>yes</td>
+<td>Extraction Method</td>
+</tr>
+<tr>
+<td><code>extraction_confidence</code></td>
+<td><code>number</code> or <code>null</code></td>
+<td>yes</td>
+<td>Extraction Confidence</td>
+</tr>
+<tr>
+<td><code>original_filename</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Original Filename</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string:date-time</code></td>
+<td>yes</td>
+<td>Created At</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiptreviewstatus">ReceiptReviewStatus<a class="headerlink" href="#receiptreviewstatus" title="Permanent link">&para;</a></h3>
+<p>One of: <code>needs_review</code>, <code>approved</code>, <code>rejected</code></p>
+<h3 id="receiptstatus">ReceiptStatus<a class="headerlink" href="#receiptstatus" title="Permanent link">&para;</a></h3>
+<p>One of: <code>pending</code>, <code>processing</code>, <code>parsed</code>, <code>failed</code>, <code>reviewed</code></p>
+<h3 id="reorderpagesrequest">ReorderPagesRequest<a class="headerlink" href="#reorderpagesrequest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new_order</code></td>
+<td>list of <code>integer</code></td>
+<td>yes</td>
+<td>New Order</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rotatepagesrequest">RotatePagesRequest<a class="headerlink" href="#rotatepagesrequest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page_numbers</code></td>
+<td>list of <code>integer</code></td>
+<td>yes</td>
+<td>Page Numbers</td>
+</tr>
+<tr>
+<td><code>degrees</code></td>
+<td><code>integer</code></td>
+<td>yes</td>
+<td>Degrees</td>
+</tr>
+</tbody>
+</table>
+<h3 id="splitdocumentrequest">SplitDocumentRequest<a class="headerlink" href="#splitdocumentrequest" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page_ranges</code></td>
+<td>list of list of <code>integer</code></td>
+<td>yes</td>
+<td>Page Ranges</td>
+</tr>
+</tbody>
+</table>
+<h3 id="validationerror">ValidationError<a class="headerlink" href="#validationerror" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loc</code></td>
+<td>list of <code>string</code> or <code>integer</code></td>
+<td>yes</td>
+<td>Location</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Message</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>yes</td>
+<td>Error Type</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td></td>
+<td>no</td>
+<td>Input</td>
+</tr>
+<tr>
+<td><code>ctx</code></td>
+<td><code>object</code></td>
+<td>no</td>
+<td>Context</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

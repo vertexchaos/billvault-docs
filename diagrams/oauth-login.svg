@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 532" width="1150" height="532" role="img" aria-label="OAuth login and signup">
+<rect width="100%" height="100%" fill="#111111"/>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ced4da"/></marker></defs>
+<text x="50" y="46" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="22" font-weight="700">OAuth login and signup</text>
+<path d="M340.0,126.0 L430.0,126.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M720.0,126.0 L810.0,126.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M955.0,162.0 L955.0,219.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M810.0,255.0 L720.0,255.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M430.0,255.0 L340.0,255.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M195.0,291.0 L195.0,348.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M340.0,384.0 L430.0,384.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M720.0,384.0 L810.0,384.0" fill="none" stroke="#ced4da" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="50.0" y="94.0" width="290" height="64.0" rx="8" fill="#1c4468" stroke="#ced4da" stroke-width="1.2"/>
+<text x="195.0" y="116.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">GET /auth/login</text>
+<text x="195.0" y="136.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">buttons for configured_providers() only</text>
+<rect x="430.0" y="90.0" width="290" height="72.0" rx="8" fill="#1c4468" stroke="#ced4da" stroke-width="1.2"/>
+<text x="575.0" y="112.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">GET /auth/{provider}/authorize</text>
+<text x="575.0" y="132.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">404 if unconfigured; redirect_uri pinned</text>
+<text x="575.0" y="146.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">to oauth_redirect_base_url</text>
+<rect x="810.0" y="90.0" width="290" height="72.0" rx="8" fill="#2f343a" stroke="#ced4da" stroke-width="1.2"/>
+<text x="955.0" y="112.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">Provider consent</text>
+<text x="955.0" y="132.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">Google, Microsoft, LinkedIn (OIDC</text>
+<text x="955.0" y="146.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">discovery); GitHub (plain OAuth2)</text>
+<rect x="810.0" y="219.0" width="290" height="72.0" rx="8" fill="#1c4468" stroke="#ced4da" stroke-width="1.2"/>
+<text x="955.0" y="241.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">GET /auth/{provider}/callback</text>
+<text x="955.0" y="261.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">authorize_access_token(): authorization</text>
+<text x="955.0" y="275.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">code to tokens</text>
+<rect x="430.0" y="212.0" width="290" height="86.0" rx="8" fill="#1f5133" stroke="#ced4da" stroke-width="1.2"/>
+<text x="575.0" y="234.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">Profile</text>
+<text x="575.0" y="254.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">GitHub: fetch_github_profile() with</text>
+<text x="575.0" y="268.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">/user/emails fallback; others: userinfo</text>
+<text x="575.0" y="282.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">then normalize_profile()</text>
+<rect x="50.0" y="219.0" width="290" height="72.0" rx="8" fill="#1f5133" stroke="#ced4da" stroke-width="1.2"/>
+<text x="195.0" y="241.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">_find_or_create_user()</text>
+<text x="195.0" y="261.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">matched by email; 400 if the provider</text>
+<text x="195.0" y="275.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">returns none</text>
+<rect x="50.0" y="348.0" width="290" height="72.0" rx="8" fill="#1f5133" stroke="#ced4da" stroke-width="1.2"/>
+<text x="195.0" y="370.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">_upsert_identity()</text>
+<text x="195.0" y="390.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">OAuthIdentity(provider,</text>
+<text x="195.0" y="404.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">provider_account_id)</text>
+<rect x="430.0" y="348.0" width="290" height="72.0" rx="8" fill="#63401a" stroke="#ced4da" stroke-width="1.2"/>
+<text x="575.0" y="370.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">Session</text>
+<text x="575.0" y="390.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">user_id and last_activity set; redirect</text>
+<text x="575.0" y="404.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">to /me</text>
+<rect x="810.0" y="348.0" width="290" height="72.0" rx="8" fill="#1c4468" stroke="#ced4da" stroke-width="1.2"/>
+<text x="955.0" y="370.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="13" font-weight="700">GET /me</text>
+<text x="955.0" y="390.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">require_user: 401 without a valid</text>
+<text x="955.0" y="404.0" text-anchor="middle" fill="#f1f3f5" fill-opacity="0.85" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">session</text>
+<rect x="337.1" y="104.0" width="95.8" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="385.0" y="118.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">pick provider</text>
+<rect x="733.6" y="104.0" width="62.8" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="765.0" y="118.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">redirect</text>
+<rect x="961.0" y="181.0" width="36.4" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="979.2" y="195.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">code</text>
+<rect x="740.2" y="233.0" width="49.6" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="765.0" y="247.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">tokens</text>
+<rect x="363.5" y="233.0" width="43.0" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="385.0" y="247.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">email</text>
+<rect x="201.0" y="310.0" width="148.6" height="19.0" rx="3" fill="#111111" fill-opacity="0.9"/>
+<text x="275.3" y="324.0" text-anchor="middle" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">same email, same User</text>
+<rect x="50.0" y="466.0" width="14" height="14" rx="3" fill="#1c4468" stroke="#ced4da"/>
+<text x="72.0" y="478.0" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">Route handler in app/api/auth_routes.py</text>
+<rect x="357.4" y="466.0" width="14" height="14" rx="3" fill="#1f5133" stroke="#ced4da"/>
+<text x="379.4" y="478.0" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">Service function in app/services/oauth.py or a helper in auth_routes.py</text>
+<rect x="876.0" y="466.0" width="14" height="14" rx="3" fill="#2f343a" stroke="#ced4da"/>
+<text x="898.0" y="478.0" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">External identity provider</text>
+<rect x="50.0" y="488.0" width="14" height="14" rx="3" fill="#63401a" stroke="#ced4da"/>
+<text x="72.0" y="500.0" fill="#f1f3f5" font-family="Cascadia Code, Cascadia Mono, ui-monospace, monospace" font-size="11">Session state</text>
+</svg>

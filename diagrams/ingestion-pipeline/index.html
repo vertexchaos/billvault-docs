@@ -1,0 +1,727 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Receipt and invoice ingestion, extraction and review.">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../oauth-login/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Ingestion pipeline - BillVault</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ingestion-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BillVault" class="md-header__button md-logo" aria-label="BillVault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BillVault
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ingestion pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BillVault" class="md-nav__button md-logo" aria-label="BillVault" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BillVault
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture diagrams
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture diagrams
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingestion pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oauth-login/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OAuth login and signup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ingestion-pipeline">Ingestion pipeline<a class="headerlink" href="#ingestion-pipeline" title="Permanent link">&para;</a></h1>
+<p>How a document gets from an upload, a directory, a scheduled poll or a cloud-storage account to a persisted Receipt. Names are taken from app/api/routes.py, app/tasks.py, app/services/ingestor.py and app/services/extractor.py.</p>
+<pre class="mermaid"><code>%%{init: {'theme':'dark','themeVariables':{'background':'#111111','primaryColor':'#1c4468','primaryTextColor':'#f1f3f5','primaryBorderColor':'#ced4da','lineColor':'#ced4da','secondaryColor':'#1f5133','tertiaryColor':'#2f343a','edgeLabelBackground':'#111111','fontFamily':'Cascadia Code, Cascadia Mono, monospace'}}}%%
+flowchart TB
+  n_dirapi["&lt;b&gt;POST /api/ingest/directory&lt;/b&gt;&lt;br/&gt;is_allowed_ingest_root() else 422; ImportBatch QUEUED"]:::blue
+  n_upload["&lt;b&gt;POST /api/documents/upload&lt;/b&gt;&lt;br/&gt;413 over max_upload_size_bytes; save_bytes(); ImportBatch QUEUED"]:::blue
+  n_poll["&lt;b&gt;poll_ingest_directories_task&lt;/b&gt;&lt;br/&gt;arq cron every 15 min; skips files whose hash is already known"]:::gray
+  n_cloud["&lt;b&gt;poll_cloud_storage_accounts_task&lt;/b&gt;&lt;br/&gt;arq cron every 15 min; Dropbox and OneDrive accounts"]:::gray
+  n_dirtask["&lt;b&gt;run_ingest_directory_task&lt;/b&gt;&lt;br/&gt;discover_supported_files(); sets files_discovered"]:::green
+  n_filetask["&lt;b&gt;run_ingest_file_task&lt;/b&gt;&lt;br/&gt;max_tries=3; Retry(defer=30) on a transient gateway error"]:::green
+  n_ingest["&lt;b&gt;ingest_file()&lt;/b&gt;&lt;br/&gt;_create_document(); .xml to extract_xml(), else extract()"]:::green
+  n_xml["&lt;b&gt;extract_xml()&lt;/b&gt;&lt;br/&gt;UBL / ZUGFeRD with lxml"]:::green
+  n_t1["&lt;b&gt;1. invoice2data templates&lt;/b&gt;&lt;br/&gt;_try_invoice2data() on a PDF"]:::green
+  n_t2["&lt;b&gt;2. OCR gateway&lt;/b&gt;&lt;br/&gt;_try_unlimited_ocr(); also the only path for JPEG, PNG and TIFF"]:::green
+  n_t3["&lt;b&gt;3. AI gateway&lt;/b&gt;&lt;br/&gt;_try_ai_gateway(): PDF text sent to an LLM"]:::green
+  n_persist["&lt;b&gt;_persist()&lt;/b&gt;&lt;br/&gt;duplicate skip; card redaction (Luhn); review flags; Receipt + LineItems"]:::orange
+  n_counters["&lt;b&gt;increment_batch_counter()&lt;/b&gt;&lt;br/&gt;atomic UPDATE...RETURNING: receipts_created or duplicates_skipped"]:::orange
+  n_done["&lt;b&gt;ImportBatch COMPLETED&lt;/b&gt;&lt;br/&gt;upload: on success; directory: when files_processed == files_discovered"]:::orange
+  n_dirapi --&gt;|"enqueue"| n_dirtask
+  n_upload --&gt;|"enqueue"| n_filetask
+  n_poll --&gt; n_filetask
+  n_cloud --&gt; n_filetask
+  n_dirtask --&gt;|"one job per file"| n_filetask
+  n_filetask --&gt; n_ingest
+  n_ingest --&gt;|".xml"| n_xml
+  n_ingest --&gt;|"PDF"| n_t1
+  n_ingest --&gt;|"image bytes"| n_t2
+  n_t1 --&gt;|"no template match"| n_t2
+  n_t2 --&gt;|"no OCR result"| n_t3
+  n_xml --&gt; n_persist
+  n_t1 --&gt; n_persist
+  n_t2 --&gt; n_persist
+  n_t3 --&gt; n_persist
+  n_persist --&gt; n_counters
+  n_counters --&gt; n_done
+  classDef blue fill:#1c4468,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef green fill:#1f5133,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef gray fill:#2f343a,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef orange fill:#63401a,stroke:#ced4da,color:#f1f3f5,stroke-width:1px</code></pre>
+<p>Download: <a href="../ingestion-pipeline.svg">SVG</a> · <a href="../ingestion-pipeline.excalidraw">Excalidraw</a> · <a href="../ingestion-pipeline.mmd">Mermaid source</a> · <a href="../ingestion-pipeline.html">Interactive HTML</a> (docs site)</p>
+<table>
+<thead>
+<tr>
+<th>Colour</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blue</td>
+<td>Entry point or request handler</td>
+</tr>
+<tr>
+<td>green</td>
+<td>Worker task or pipeline step</td>
+</tr>
+<tr>
+<td>gray</td>
+<td>Scheduled trigger</td>
+</tr>
+<tr>
+<td>orange</td>
+<td>Persistence and batch state</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/ingest/directory</code></td>
+<td>is_allowed_ingest_root() else 422; ImportBatch QUEUED</td>
+</tr>
+<tr>
+<td><code>POST /api/documents/upload</code></td>
+<td>413 over max_upload_size_bytes; save_bytes(); ImportBatch QUEUED</td>
+</tr>
+<tr>
+<td><code>poll_ingest_directories_task</code></td>
+<td>arq cron every 15 min; skips files whose hash is already known</td>
+</tr>
+<tr>
+<td><code>poll_cloud_storage_accounts_task</code></td>
+<td>arq cron every 15 min; Dropbox and OneDrive accounts</td>
+</tr>
+<tr>
+<td><code>run_ingest_directory_task</code></td>
+<td>discover_supported_files(); sets files_discovered</td>
+</tr>
+<tr>
+<td><code>run_ingest_file_task</code></td>
+<td>max_tries=3; Retry(defer=30) on a transient gateway error</td>
+</tr>
+<tr>
+<td><code>ingest_file()</code></td>
+<td>_create_document(); .xml to extract_xml(), else extract()</td>
+</tr>
+<tr>
+<td><code>extract_xml()</code></td>
+<td>UBL / ZUGFeRD with lxml</td>
+</tr>
+<tr>
+<td><code>1. invoice2data templates</code></td>
+<td>_try_invoice2data() on a PDF</td>
+</tr>
+<tr>
+<td><code>2. OCR gateway</code></td>
+<td>_try_unlimited_ocr(); also the only path for JPEG, PNG and TIFF</td>
+</tr>
+<tr>
+<td><code>3. AI gateway</code></td>
+<td>_try_ai_gateway(): PDF text sent to an LLM</td>
+</tr>
+<tr>
+<td><code>_persist()</code></td>
+<td>duplicate skip; card redaction (Luhn); review flags; Receipt + LineItems</td>
+</tr>
+<tr>
+<td><code>increment_batch_counter()</code></td>
+<td>atomic UPDATE...RETURNING: receipts_created or duplicates_skipped</td>
+</tr>
+<tr>
+<td><code>ImportBatch COMPLETED</code></td>
+<td>upload: on success; directory: when files_processed == files_discovered</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Waterfall order</strong></p>
+<ul>
+<li>XML first, then invoice2data templates, then the OCR gateway, then the AI gateway</li>
+<li>Deterministic paths always win before any AI call</li>
+</ul>
+<p><strong>Failure handling</strong></p>
+<ul>
+<li>A transient gateway error retries the job after 30 s, up to 3 tries</li>
+<li>In a directory batch one bad file is counted in receipts_failed and does not stop the others</li>
+</ul>
+<p><a href="../">All diagrams</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
