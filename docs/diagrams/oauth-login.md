@@ -1,0 +1,62 @@
+# OAuth login and signup
+
+The end-user sign-in flow for Google, Microsoft, LinkedIn (OIDC) and GitHub (OAuth2). Names are taken from app/api/auth_routes.py and app/services/oauth.py.
+
+```mermaid
+%%{init: {'theme':'dark','themeVariables':{'background':'#111111','primaryColor':'#1c4468','primaryTextColor':'#f1f3f5','primaryBorderColor':'#ced4da','lineColor':'#ced4da','secondaryColor':'#1f5133','tertiaryColor':'#2f343a','edgeLabelBackground':'#111111','fontFamily':'Cascadia Code, Cascadia Mono, monospace'}}}%%
+flowchart TB
+  n_login["<b>GET /auth/login</b><br/>buttons for configured_providers() only"]:::blue
+  n_authorize["<b>GET /auth/{provider}/authorize</b><br/>404 if unconfigured; redirect_uri pinned to oauth_redirect_base_url"]:::blue
+  n_idp["<b>Provider consent</b><br/>Google, Microsoft, LinkedIn (OIDC discovery); GitHub (plain OAuth2)"]:::gray
+  n_callback["<b>GET /auth/{provider}/callback</b><br/>authorize_access_token(): authorization code to tokens"]:::blue
+  n_profile["<b>Profile</b><br/>GitHub: fetch_github_profile() with /user/emails fallback; others: userinfo then normalize_profile()"]:::green
+  n_user["<b>_find_or_create_user()</b><br/>matched by email; 400 if the provider returns none"]:::green
+  n_identity["<b>_upsert_identity()</b><br/>OAuthIdentity(provider, provider_account_id)"]:::green
+  n_session["<b>Session</b><br/>user_id and last_activity set; redirect to /me"]:::orange
+  n_me["<b>GET /me</b><br/>require_user: 401 without a valid session"]:::blue
+  n_login -->|"pick provider"| n_authorize
+  n_authorize -->|"redirect"| n_idp
+  n_idp -->|"code"| n_callback
+  n_callback -->|"tokens"| n_profile
+  n_profile -->|"email"| n_user
+  n_user -->|"same email, same User"| n_identity
+  n_identity --> n_session
+  n_session --> n_me
+  classDef blue fill:#1c4468,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef green fill:#1f5133,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef gray fill:#2f343a,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+  classDef orange fill:#63401a,stroke:#ced4da,color:#f1f3f5,stroke-width:1px
+```
+
+Download: [SVG](oauth-login.svg) · [Excalidraw](oauth-login.excalidraw) · [Mermaid source](oauth-login.mmd) · [Interactive HTML](oauth-login.html) (docs site)
+
+| Colour | Meaning |
+|---|---|
+| blue | Route handler in app/api/auth_routes.py |
+| green | Service function in app/services/oauth.py or a helper in auth_routes.py |
+| gray | External identity provider |
+| orange | Session state |
+
+| Node | Detail |
+|---|---|
+| `GET /auth/login` | buttons for configured_providers() only |
+| `GET /auth/{provider}/authorize` | 404 if unconfigured; redirect_uri pinned to oauth_redirect_base_url |
+| `Provider consent` | Google, Microsoft, LinkedIn (OIDC discovery); GitHub (plain OAuth2) |
+| `GET /auth/{provider}/callback` | authorize_access_token(): authorization code to tokens |
+| `Profile` | GitHub: fetch_github_profile() with /user/emails fallback; others: userinfo then normalize_profile() |
+| `_find_or_create_user()` | matched by email; 400 if the provider returns none |
+| `_upsert_identity()` | OAuthIdentity(provider, provider_account_id) |
+| `Session` | user_id and last_activity set; redirect to /me |
+| `GET /me` | require_user: 401 without a valid session |
+
+**One user, several providers**
+
+- A user is matched by email, so signing in with a second provider using the same email lands on the same User
+- A provider that returns no email is rejected with 400
+
+**Configuration**
+
+- Only providers with credentials in the environment appear on the login page
+- The callback URL is built from oauth_redirect_base_url, not from the request Host header
+
+[All diagrams](index.md)

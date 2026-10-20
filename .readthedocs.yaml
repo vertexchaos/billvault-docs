@@ -1,0 +1,17 @@
+# Read the Docs build for the PUBLIC docs repo. Keys verified against
+# https://docs.readthedocs.com/platform/stable/config-file/v2.html (version 2, MkDocs).
+# Generated into the public repo as .readthedocs.yaml by scripts/build_public_docs.py.
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.13"
+
+mkdocs:
+  configuration: mkdocs.yml
+  fail_on_warning: true
+
+python:
+  install:
+    - requirements: requirements.txt

@@ -1,0 +1,48 @@
+# Shared base for BOTH docs sites:
+#   - mkdocs.yml (private, full site: inherits this file and adds the whole nav + mkdocstrings)
+#   - the public docs, which scripts/build_public_docs.py assembles from this file plus a nav
+#     filtered down to the pages listed in docs/public_allowlist.txt.
+# Keep this file free of `nav`, `docs_dir`, `site_dir` and plugins that need the source code.
+site_name: BillVault
+site_description: Receipt and invoice ingestion, extraction and review.
+
+theme:
+  name: material
+  # No Google Fonts request: system fonts only (no third-party fetch, works offline).
+  font: false
+  palette:
+    # Dark first: it is the default. The toggle switches to light.
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - content.code.copy
+    - navigation.sections
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+docs_dir: docs
+site_dir: site
+
+nav:
+- Home: index.md
+- Architecture diagrams:
+  - Overview: diagrams/index.md
+  - Ingestion pipeline: diagrams/ingestion-pipeline.md
+  - OAuth login and signup: diagrams/oauth-login.md
+- Reference:
+  - API: reference/api.md
